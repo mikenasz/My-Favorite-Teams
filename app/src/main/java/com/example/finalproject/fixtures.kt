@@ -28,7 +28,7 @@ data class teams_list(
 //Team variables
 data class Team(
     val name: String,
-    val crestUrl: String?,
+    val crest: String,
     val id : Int,
     val founded : Int,
     val clubColors : String,
@@ -38,11 +38,38 @@ data class Team(
 
 
     )
+
+data class match_list(
+    val matches: List<Match>
+)
+data class Match(
+    val utcDate : String ,
+    val homeTeam: Home,
+    val awayTeam : Away,
+    val score : Score,
+)
+data class Home(
+    val id: Int,
+    val name :String,
+    val crest :String
+)
+data class Away(
+    val id: Int,
+    val name:String,
+    val crest:String
+)
+data class Score(
+    val fullTime : full_Time,
+)
+data class full_Time(
+    val home: Int,
+    val away: Int,
+)
 //favorite team used to store into firebase
 data class fav_team(
-    var name : String? = null,
+   // var name : String? = null,
     var team : String? = null,
-    var rating : String? = null,
+    var logo : String? = null,
 
 )
 

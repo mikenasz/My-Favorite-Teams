@@ -32,9 +32,9 @@ class dataAdapter(private val teamData: List<fav_team>): RecyclerView.Adapter<da
 
         val currentItem = teamData[position]
 
-        holder.personName.text = currentItem.name
-        holder.personTeam.text = currentItem.team
-        holder.teamRating.text = "${currentItem.rating}/5 Stars"
+       // holder.personName.text = currentItem.name
+        //holder.personTeam.text = currentItem.team
+       // holder.teamRating.text = "${currentItem.rating}/5 Stars"
 
 
 

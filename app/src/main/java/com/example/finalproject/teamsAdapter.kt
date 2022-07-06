@@ -1,17 +1,24 @@
 package com.example.finalproject
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
+
+
 //Adapter for teams
+private lateinit var fireBaseDb: FirebaseFirestore
 class teamsAdapter (private val teams : List<Team>) : RecyclerView.Adapter<teamsAdapter.MyViewHolder>()
 
 {
@@ -32,16 +39,13 @@ class teamsAdapter (private val teams : List<Team>) : RecyclerView.Adapter<teams
         holder.teamName.text = currentItem.name
         val id = currentItem.id
         val club = currentItem.name
-        val tla = currentItem.tla
-        val founded = currentItem.founded
-        val clubColors = currentItem.clubColors
         val button = holder.btn
-        val venue= currentItem.venue
         val context  =  holder.itemView.context
-        val logo = currentItem.crestUrl
+        val logo = currentItem.crest
 
         Glide.with(context)
-            .load(currentItem.crestUrl)
+            .load(currentItem.crest)
+            .disallowHardwareConfig()
             .placeholder(R.drawable.nullimg) //Placeholder image for when image path doesnt exist
             .fitCenter()
             .into(holder.img)
@@ -49,13 +53,11 @@ class teamsAdapter (private val teams : List<Team>) : RecyclerView.Adapter<teams
         // Additional info to be used in info fragment
         val context2 = holder.itemView.context
         holder.img.setOnClickListener{
-            val myIntent = Intent(context2, RatingActivity::class.java)
+            val myIntent = Intent(context2, MatchesActivity::class.java)
             myIntent.putExtra("id",id)
-            myIntent.putExtra("club",club)
-            myIntent.putExtra("tla",tla)
-            myIntent.putExtra("founded",founded)
-            myIntent.putExtra("clubColors",clubColors)
-            myIntent.putExtra("venue",venue)
+            //myIntent.putExtra("club",club)
+
+
 
             context2.startActivity(myIntent)
 
@@ -63,12 +65,19 @@ class teamsAdapter (private val teams : List<Team>) : RecyclerView.Adapter<teams
         }
         // This is for add team
         button.setOnClickListener{
+            fireBaseDb = FirebaseFirestore.getInstance()
+            val fav_teams = fireBaseDb.collection("teams")
             val add = holder.itemView.context
-            val myIntent = Intent(add, addTeam::class.java )
-            myIntent.putExtra("id",id)
-            myIntent.putExtra("club",club)
-            myIntent.putExtra("logo",logo)
-            add.startActivity(myIntent)
+            val teams = fav_team(
+                club,
+                logo.toString()
+            )
+
+
+            val id = fav_teams.document().id
+            fav_teams.document(id).set(teams)
+            Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
+
         }
 
 

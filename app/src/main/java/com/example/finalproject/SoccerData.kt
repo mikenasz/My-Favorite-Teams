@@ -10,17 +10,25 @@ const val API_KEY = "X-Auth-Token: 959d2937581149adbf2f530b4b0f6861"
 //API call for league and team data
 interface SoccerData {
     @Headers(API_KEY)
-    @GET("/v2/competitions")
+    @GET("/v4/competitions")
     fun getCompetitions(
         @Query("plan") plan: String
     ): Call<competitons>
 
     @Headers(API_KEY)
-    @GET("/v2/competitions/{id}/teams")
+    @GET("/v4/competitions/{id}/teams")
     fun getLeagues(
         @Path("id") id: String,
         @Query("season") year: String
     ): Call<teams_list>
+
+    @Headers(API_KEY)
+    @GET("/v4/teams/{id}/matches")
+    fun getMatches(
+        @Path("id") id: String,
+        @Query("plan") plan: String,
+        @Query("season") year: String
+    ): Call<match_list>
 
 
 }

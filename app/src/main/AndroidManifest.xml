@@ -12,15 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
+        <activity
+            android:name=".MatchesActivity"
+            android:exported="false" />
 
         <activity
-            android:name=".addTeam"
-            android:exported="false" />
-        <activity
             android:name=".FavoriteTeams"
-            android:exported="false" />
-        <activity
-            android:name=".RatingActivity"
             android:exported="false" />
         <activity
             android:name=".SecondActivity"
