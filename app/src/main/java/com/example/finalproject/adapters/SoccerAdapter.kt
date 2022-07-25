@@ -1,16 +1,15 @@
-package com.example.finalproject
+package com.example.finalproject.adapters
 
-import android.content.ContentValues
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalproject.R
+import com.example.finalproject.SecondActivity
+import com.example.finalproject.fixtures
+
 //Adapter for competitions
 class SoccerAdapter(private val leagues : List<fixtures>) : RecyclerView.Adapter<SoccerAdapter.MyViewHolder>()
 {
@@ -33,13 +32,16 @@ class SoccerAdapter(private val leagues : List<fixtures>) : RecyclerView.Adapter
         holder.title.text = currentItem.name
         holder.location.text = currentItem.area.name
         val id = currentItem.passId
-
+        val passCountry = currentItem.name
+        val passFlag = currentItem.area.flag
         val context = holder.itemView.context
         //Pass id to next activity with intent
         holder.itemView.setOnClickListener{
 
            val myIntent = Intent(context, SecondActivity::class.java)
                  myIntent.putExtra("id",id)
+                myIntent.putExtra("league_name",passCountry)
+                myIntent.putExtra("flag",passFlag)
 
             context.startActivity(myIntent)
 

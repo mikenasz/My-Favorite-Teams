@@ -12,6 +12,7 @@ data class fixtures(
 data class Area(
     val id : Int,
     val name : String,
+    val flag : String,
 )
 //Lists of leagues and competitons
 data class competitons (
@@ -67,7 +68,7 @@ data class full_Time(
 )
 //favorite team used to store into firebase
 data class fav_team(
-   // var name : String? = null,
+    var id : String? = null,
     var team : String? = null,
     var logo : String? = null,
 

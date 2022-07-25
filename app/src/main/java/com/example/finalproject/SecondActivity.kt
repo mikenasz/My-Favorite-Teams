@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.finalproject.Api.SoccerData
+import com.example.finalproject.adapters.teamsAdapter
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -50,9 +52,15 @@ class SecondActivity : AppCompatActivity() {
 
         // Get the id passed from intent to display teams in leagues
         val data = intent.getIntExtra("id", 2021)
+        val league = intent.getStringExtra("league_name")
+
+        //val flag = intent.getStringExtra("flag")
         Log.d(TAG, "onResponse: $data")
+        Log.d(TAG, "onResponse: $league")
+        //Log.d(TAG, "onResponse: $flag")
+
         // Api call to get teams in that league
-        football_api.getLeagues(data.toString(), "2021").enqueue(object :
+        football_api.getLeagues(data, "2021").enqueue(object :
             Callback<teams_list> {
 
             override fun onResponse(
@@ -88,6 +96,12 @@ class SecondActivity : AppCompatActivity() {
         finish()
     }
 
+    private fun goHome(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
         menuInflater.inflate(R.menu.menu, menu)
@@ -109,6 +123,17 @@ class SecondActivity : AppCompatActivity() {
                             Log.e(TAG, "Task is not successful:${task.exception}")
                         }
                     }
+                true
+            }
+            R.id.go_home -> {
+
+                Toast.makeText(this, "Back Home", Toast.LENGTH_SHORT).show()
+                goHome()
+               true
+            }
+            R.id.savedteam_action -> {
+
+                goHome()
                 true
             }
             else -> {

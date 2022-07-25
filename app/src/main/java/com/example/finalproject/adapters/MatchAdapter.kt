@@ -1,13 +1,14 @@
-package com.example.finalproject
+package com.example.finalproject.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.finalproject.Match
+import com.example.finalproject.R
 
 class matchAdapter(private val matches: List<Match>): RecyclerView.Adapter<matchAdapter.MyViewHolder>() {
 
@@ -23,13 +24,13 @@ class matchAdapter(private val matches: List<Match>): RecyclerView.Adapter<match
 
 
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): matchAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.match_item, parent, false)
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: matchAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = matches[position]
         holder.date.text = currentItem.utcDate
         holder.homeTeam.text = currentItem.homeTeam.name
@@ -50,6 +51,7 @@ class matchAdapter(private val matches: List<Match>): RecyclerView.Adapter<match
             .placeholder(R.drawable.nullimg) //Placeholder image for when image path doesnt exist
             .fitCenter()
             .into(holder.awayLogo)
+
 
 
 

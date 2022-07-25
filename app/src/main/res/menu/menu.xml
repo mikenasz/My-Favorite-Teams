@@ -3,6 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/savedteam_action"
+        android:icon="@android:drawable/btn_star"
+        android:title="saved"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/go_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="home"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/logout_action"
         android:icon="@drawable/ic_baseline_exit_to_app_24"
         android:title="@string/logout"

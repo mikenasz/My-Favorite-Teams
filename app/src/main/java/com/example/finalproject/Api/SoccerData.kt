@@ -1,5 +1,8 @@
-package com.example.finalproject
+package com.example.finalproject.Api
 
+import com.example.finalproject.competitons
+import com.example.finalproject.match_list
+import com.example.finalproject.teams_list
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -18,7 +21,7 @@ interface SoccerData {
     @Headers(API_KEY)
     @GET("/v4/competitions/{id}/teams")
     fun getLeagues(
-        @Path("id") id: String,
+        @Path("id") id: Int,
         @Query("season") year: String
     ): Call<teams_list>
 
