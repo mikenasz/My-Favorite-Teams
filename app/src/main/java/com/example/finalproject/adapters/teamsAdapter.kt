@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.MatchesActivity
@@ -23,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 //Adapter for teams
 private lateinit var fireBaseDb: FirebaseFirestore
-class teamsAdapter (private val teams : List<Team>) : RecyclerView.Adapter<teamsAdapter.MyViewHolder>()
+class teamsAdapter (private val teams : List<Team>, private val season: String, private val league: Int) : RecyclerView.Adapter<teamsAdapter.MyViewHolder>()
 
 {
     inner class MyViewHolder (itemView: View): RecyclerView.ViewHolder (itemView){
@@ -46,48 +43,53 @@ class teamsAdapter (private val teams : List<Team>) : RecyclerView.Adapter<teams
         val button = holder.btn
         val context  =  holder.itemView.context
         val logo = currentItem.crest
+        val year = currentItem.founded
+        val abb = currentItem.tla
+        val colors = currentItem.clubColors
+        val stadium = currentItem.venue
+        val website = currentItem.website
 
         Glide.with(context)
             .load(currentItem.crest)
             .disallowHardwareConfig()
-            .placeholder(R.drawable.nullimg) //Placeholder image for when image path doesnt exist
+            .placeholder(R.drawable.ball_null) //Placeholder image for when image path doesnt exist
             .fitCenter()
             .into(holder.img)
         fireBaseDb = FirebaseFirestore.getInstance()
         val fav_teams = fireBaseDb.collection("teams")
         val saved_id = fav_teams.document().id
 
-        // Additional info to be used in info fragment
+        // On click listener for matches
         val context2 = holder.itemView.context
         holder.img.setOnClickListener{
             val myIntent = Intent(context2, MatchesActivity::class.java)
             myIntent.putExtra("id",id)
-            //myIntent.putExtra("club",club)
+            myIntent.putExtra("club",club)
             //myIntent.putExtra("saved_id",saved_id)
-
-
+            myIntent.putExtra("season", season)
+            myIntent.putExtra("league", league)
             context2.startActivity(myIntent)
 
 
         }
-       // fireBaseDb = FirebaseFirestore.getInstance()
-        //val fav_teams = fireBaseDb.collection("teams")
-        //val saved_id = fav_teams.document().id
-        // This is for add team
+        // Save a team to database
         button.setOnClickListener{
-           // fireBaseDb = FirebaseFirestore.getInstance()
-           // val fav_teams = fireBaseDb.collection("teams")
+
 
             val teams = fav_team(
                 saved_id,
                 club,
-                logo.toString()
+                logo,
+                abb,
+                stadium,
+                year,
+                colors,
+                website
             )
 
 
            // val saved_id = fav_teams.document().id
             fav_teams.document(saved_id).set(teams)
-            Log.d(ContentValues.TAG, "ID Number: $saved_id")
             Toast.makeText(context, "Saved!", Toast.LENGTH_SHORT).show()
 
         }

@@ -1,10 +1,14 @@
 package com.example.finalproject.adapters
 
+import android.content.ContentValues.TAG
+import android.content.DialogInterface
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
 import com.example.finalproject.SecondActivity
@@ -33,17 +37,34 @@ class SoccerAdapter(private val leagues : List<fixtures>) : RecyclerView.Adapter
         holder.location.text = currentItem.area.name
         val id = currentItem.passId
         val passCountry = currentItem.name
-        val passFlag = currentItem.area.flag
+
         val context = holder.itemView.context
-        //Pass id to next activity with intent
+       //Dialog prompt to select a season
         holder.itemView.setOnClickListener{
+            val list = arrayOf("2022", "2021", "2020")
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Select a Season")
+            builder.setSingleChoiceItems(list, -1,
+                DialogInterface.OnClickListener{dialog, i ->
 
-           val myIntent = Intent(context, SecondActivity::class.java)
-                 myIntent.putExtra("id",id)
-                myIntent.putExtra("league_name",passCountry)
-                myIntent.putExtra("flag",passFlag)
+                    val season = list[i]
+                    val myIntent = Intent(context, SecondActivity::class.java)
+                    myIntent.putExtra("id",id)
+                    myIntent.putExtra("league_name",passCountry)
 
-            context.startActivity(myIntent)
+                    myIntent.putExtra("season", season)
+
+                    context.startActivity(myIntent)
+                    dialog.dismiss()
+                }
+
+                )
+            builder.setNeutralButton("Cancel"){dialog, which ->
+                dialog.cancel()
+            }
+
+            val dialog = builder.create()
+            dialog.show()
 
         }
     }

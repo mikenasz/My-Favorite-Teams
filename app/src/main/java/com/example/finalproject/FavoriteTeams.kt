@@ -19,11 +19,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
 
-//Class uses firebase to show users favorite teams
+
 class FavoriteTeams : AppCompatActivity() {
     private lateinit var fireBaseDb: FirebaseFirestore
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +32,8 @@ class FavoriteTeams : AppCompatActivity() {
         if (currentUser == null) {
             startRegisterActivity()
         }
-        //val deleteID = intent.getStringExtra("passID")
-        //Log.d(ContentValues.TAG, "ID Number passed: $deleteID")
 
         show()
-
 
 
     }
@@ -56,9 +51,6 @@ class FavoriteTeams : AppCompatActivity() {
                 if (snapshots != null) {
 
                     Log.d(TAG, "onEvent: -----------------------------")
-
-                    //val stringBuilder = StringBuilder()
-
                     val teamss = snapshots.toObjects<fav_team>()
 
 
@@ -76,7 +68,7 @@ class FavoriteTeams : AppCompatActivity() {
     fun getData(show_team : List<fav_team>){
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerData)
-        //val deleteID = intent.getStringExtra("passID").toString()
+
         recyclerView.adapter = dataAdapter(show_team)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -90,15 +82,25 @@ class FavoriteTeams : AppCompatActivity() {
 
 
 
-    private fun clearEditTexts(){
+    fun go_saved(view: View){
 
-       // delete_id.text.clear()
+        val intent = Intent(this, FavoriteTeams::class.java)
+
+        startActivity(intent)
+
+        finish()
 
     }
+    // Logout abiltiy
     private fun startRegisterActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+        finish()
+    }
 
+    private fun goHome(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
         finish()
     }
 
@@ -120,9 +122,20 @@ class FavoriteTeams : AppCompatActivity() {
 
                             startRegisterActivity()
                         } else {
-                            Log.e(TAG, "Task is not successful:${task.exception}")
+                            Log.e(ContentValues.TAG, "Task is not successful:${task.exception}")
                         }
                     }
+                true
+            }
+            R.id.go_home -> {
+
+                Toast.makeText(this, "Back Home", Toast.LENGTH_SHORT).show()
+                goHome()
+                true
+            }
+            R.id.savedteam_action -> {
+
+                goHome()
                 true
             }
             else -> {

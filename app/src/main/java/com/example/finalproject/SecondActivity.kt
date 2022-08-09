@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -31,7 +32,6 @@ class SecondActivity : AppCompatActivity() {
     private val BASE_URL = "https://api.football-data.org/"
     val teams_list = ArrayList<Team>()
 
-    val adapter = teamsAdapter(teams_list)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
@@ -40,9 +40,13 @@ class SecondActivity : AppCompatActivity() {
             startRegisterActivity()
         }
 
+        var season = intent.getStringExtra("season").toString()
+        val data = intent.getIntExtra("id", 2021)
+        val adapter = teamsAdapter(teams_list,season,data)
         val recyclerView = findViewById<RecyclerView>(R.id.teams_list)
+        recyclerView.layoutManager = GridLayoutManager(applicationContext,3)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -50,17 +54,12 @@ class SecondActivity : AppCompatActivity() {
             .build()
         val football_api = retrofit.create(SoccerData::class.java)
 
-        // Get the id passed from intent to display teams in leagues
-        val data = intent.getIntExtra("id", 2021)
-        val league = intent.getStringExtra("league_name")
 
-        //val flag = intent.getStringExtra("flag")
-        Log.d(TAG, "onResponse: $data")
-        Log.d(TAG, "onResponse: $league")
-        //Log.d(TAG, "onResponse: $flag")
+
+
 
         // Api call to get teams in that league
-        football_api.getLeagues(data, "2021").enqueue(object :
+        football_api.getLeagues(data, season).enqueue(object :
             Callback<teams_list> {
 
             override fun onResponse(
@@ -73,6 +72,7 @@ class SecondActivity : AppCompatActivity() {
 
                 if (body == null) {
                     Log.w(ContentValues.TAG, "Valid response was not received")
+                    Toast.makeText(this@SecondActivity, " No Teams Found ", Toast.LENGTH_LONG).show()
                     return
                 }
 
@@ -101,7 +101,11 @@ class SecondActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
+    private fun goSaved(){
+        val intent = Intent(this, FavoriteTeams::class.java)
+        startActivity(intent)
+        finish()
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
         menuInflater.inflate(R.menu.menu, menu)
@@ -133,7 +137,7 @@ class SecondActivity : AppCompatActivity() {
             }
             R.id.savedteam_action -> {
 
-                goHome()
+                goSaved()
                 true
             }
             else -> {

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,9 @@ class MatchesActivity : AppCompatActivity() {
     private val BASE_URL= "https://api.football-data.org/"
     val match_list = ArrayList<Match>()
     val adapter = matchAdapter(match_list)
+    lateinit var test : String
+    var data : Int = 0
+    var league : Int =0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matches)
@@ -42,10 +46,16 @@ class MatchesActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val football_api = retrofit.create(SoccerData::class.java)
-        val data = intent.getIntExtra("id", 2021)
-        //val passID = intent.getStringExtra("saved_id")
-        //Log.d(ContentValues.TAG, "ID Number passed: $passID")
-        football_api.getMatches(data.toString(), "TIER_ONE","2021").enqueue(object :
+         data = intent.getIntExtra("id", 2021)
+        league = intent.getIntExtra("league", 2021)
+        val club_text = intent.getStringExtra("club")
+        test = intent.getStringExtra("season").toString()
+        val txt_view = findViewById<TextView>(R.id.club_matches)
+        txt_view.text = "$club_text"
+
+
+        Log.d(ContentValues.TAG, "ID Number passed: $test")
+        football_api.getMatches(data.toString(), "TIER_ONE",test).enqueue(object :
             Callback<match_list> {
 
             override fun onResponse(
@@ -74,15 +84,18 @@ class MatchesActivity : AppCompatActivity() {
 
     }
     fun go_back(view: View){
+
         val intent = Intent(this, SecondActivity::class.java)
+        intent.putExtra("season",test)
+        intent.putExtra("id", league)
         startActivity(intent)
 
         finish()
     }
     fun go_saved(view: View){
-       // val passID = intent.getStringExtra("saved_id")
+
         val intent = Intent(this, FavoriteTeams::class.java)
-       // intent.putExtra("passID",passID)
+
         startActivity(intent)
 
         finish()
@@ -130,11 +143,7 @@ class MatchesActivity : AppCompatActivity() {
                 goHome()
                 true
             }
-            R.id.savedteam_action -> {
 
-                goHome()
-                true
-            }
             else -> {
 
                 super.onOptionsItemSelected(item)

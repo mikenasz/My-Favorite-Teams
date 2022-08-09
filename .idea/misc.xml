@@ -7,17 +7,19 @@
         <entry key="app/src/main/res/layout-land/activity_rating.xml" value="0.22552083333333334" />
         <entry key="app/src/main/res/layout/activity_add_team.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_favorite_teams.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_matches.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_rating.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/activity_second.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_second.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/data_item.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_info.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_match.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_rate.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/league_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/league_item.xml" value="0.45" />
         <entry key="app/src/main/res/layout/match_item.xml" value="0.45" />
         <entry key="app/src/main/res/layout/register.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/team_item.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/team_item.xml" value="0.45" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.3098958333333333" />
       </map>
     </option>

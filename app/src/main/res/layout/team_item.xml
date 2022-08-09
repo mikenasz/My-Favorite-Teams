@@ -3,60 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/cardview_shadow_start_color">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="10dp"
+        android:layout_width="141dp"
+        android:layout_height="183dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardUseCompatPadding="false"
+        app:contentPadding="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#F6F6F6">
 
             <Button
                 android:id="@+id/add_to"
-                style="@android:style/Widget.DeviceDefault.Light.Button.Small"
-                android:layout_width="148dp"
+                android:layout_width="85dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif-thin"
                 android:text="SAVE"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:cornerRadius="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/team_name" />
 
             <TextView
                 android:id="@+id/team_name"
-                android:layout_width="189dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="38dp"
-                android:layout_marginTop="16dp"
-                android:text="Manchester United"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="134dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="5dp"
+                android:text="Manchester United eefjndsjn"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/logoImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logoImage" />
 
             <ImageView
                 android:id="@+id/logoImage"
-                android:layout_width="132dp"
-                android:layout_height="137dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="13dp"
+                android:layout_width="92dp"
+                android:layout_height="89dp"
+                android:layout_marginTop="8dp"
                 android:clickable="true"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:srcCompat="@tools:sample/avatars" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

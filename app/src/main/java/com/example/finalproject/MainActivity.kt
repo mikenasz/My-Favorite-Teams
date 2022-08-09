@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private val BASE_URL= "https://api.football-data.org/"
     private val plan= "TIER_ONE"
-
+    //Activity for competions
     val league_list = ArrayList<fixtures>()
 
     val adapter = SoccerAdapter(league_list)

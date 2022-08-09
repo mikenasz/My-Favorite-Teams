@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.Match
 import com.example.finalproject.R
-
+//Adapter to display matches for a team
 class matchAdapter(private val matches: List<Match>): RecyclerView.Adapter<matchAdapter.MyViewHolder>() {
 
     inner class MyViewHolder (itemView: View): RecyclerView.ViewHolder (itemView){
@@ -43,12 +43,12 @@ class matchAdapter(private val matches: List<Match>): RecyclerView.Adapter<match
 
         Glide.with(context)
             .load(currentItem.homeTeam.crest)
-            .placeholder(R.drawable.nullimg) //Placeholder image for when image path doesnt exist
+            .placeholder(R.drawable.ball_null) //Placeholder image for when image path doesnt exist
             .fitCenter()
             .into(holder.homeLogo)
         Glide.with(context)
             .load(currentItem.awayTeam.crest)
-            .placeholder(R.drawable.nullimg) //Placeholder image for when image path doesnt exist
+            .placeholder(R.drawable.ball_null) //Placeholder image for when image path doesnt exist
             .fitCenter()
             .into(holder.awayLogo)
 

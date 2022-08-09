@@ -34,14 +34,16 @@ data class Team(
     val founded : Int,
     val clubColors : String,
     val tla : String,
-    val venue : String
+    val venue : String,
+    val website : String
 
 
 
     )
 
 data class match_list(
-    val matches: List<Match>
+    val matches: List<Match>,
+    val season : String
 )
 data class Match(
     val utcDate : String ,
@@ -71,6 +73,11 @@ data class fav_team(
     var id : String? = null,
     var team : String? = null,
     var logo : String? = null,
+    var abb : String? = null,
+    var stadium : String? = null,
+    var year : Int? = null,
+    var colors : String? = null,
+    var website : String? = null
 
 )
 
