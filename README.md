@@ -24,7 +24,8 @@ My Favorite Teams App uses the free tier of the [football-data.org](https://www.
  - **Glide**  *Image rendering*
  
  
+ [Video Demo](https://drive.google.com/file/d/1GlaBM5naiBGS6VHiP70KqUxRw7_yMbgl/view?usp=sharing)
  
  Run by cloning repoistory and with an andriod emulator.
  
-  
+ 
